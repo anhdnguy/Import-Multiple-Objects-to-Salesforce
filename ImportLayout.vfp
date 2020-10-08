@@ -1,0 +1,49 @@
+<apex:page sidebar="false" controller="FileUploader" docType="html-5.0" lightningStylesheets="true">
+    <apex:slds />
+   <apex:form >
+      <apex:sectionHeader title="Upload data from CSV file"/>
+      <apex:pagemessages />
+       
+      <apex:pageBlock >
+          <apex:pageBlockSection id="RequiredBlock" rendered="true" title="Required Information">		            
+            <apex:input required="true" type="date" label="Expected Start Date"  value="{!CloseDate}"/>
+            <apex:selectList required="true" id="recordtypeSelection" size="1" label="Student Type" value="{!recordType}">
+            	<apex:selectOptions value="{!recordOptions}"/>
+            </apex:selectList>
+            <apex:selectList required="true" id="userSelect" size="1" label="Advisor" value="{!ownerId}">
+            	<apex:selectOptions value="{!repSelectOptions}"/>
+            </apex:selectList>
+          </apex:pageBlockSection>
+      </apex:pageBlock> 
+       
+      <apex:pageBlock >
+             <!--  Component to allow user to upload file from local machine -->
+             <center>
+              <apex:inputFile value="{!contentFile}" filename="{!nameFile}" /> <apex:commandButton action="{!ReadFile}" value="Upload File" id="theButton" style="width:100px;"/>
+              <br/> <br/> <font color="red"> <b>Note: Please use the standard template to upload Records. <a href="Upload the the template to Salesforce Document and put the URL here" target="_blank"> Click here </a> to download the template. </b> </font>
+             </center>  
+       </apex:pageBlock> 
+      <!-- After the user clicks the 'Upload File' button, this section displays the inserted data -->
+       <apex:pageBlock title="Successfully Imported Students">
+      
+          <apex:pageblocktable value="{!opplist}" var="opp" rendered="{!NOT(ISNULL(opplist))}">
+          <apex:column headerValue="Opportunity ID">
+              <apex:outputField value="{!opp.Id}"/>
+          </apex:column>
+          <apex:column headerValue="Opportunity Name">
+              <apex:outputField value="{!opp.Name}"/>
+          </apex:column>
+          <apex:column headerValue="Expected Starte Date">
+              <apex:outputField value="{!opp.CloseDate}"/>
+          </apex:column>
+          <apex:column headerValue="Campaign Source">
+              <apex:outputField value="{!opp.CampaignId}"/>
+          </apex:column>
+          <apex:column headerValue="Opportunity Owner">
+              <apex:outputField value="{!opp.OwnerId}"/>
+          </apex:column>
+      </apex:pageblocktable>            
+       </apex:pageBlock>
+           
+   </apex:form>   
+</apex:page>

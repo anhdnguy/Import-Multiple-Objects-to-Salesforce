@@ -7,3 +7,5 @@ The Sales Representative will download the csv template on a Lightning Page call
 On the template, users will input the data. On the Import New Prospect, users can select the Close Date, Owner, and Record Type that apply to all of the record that they are going to import.
 
 If the system import the record successfully, it will display the records along with their ids under the Successfully Imported Students section.
+
+Click <a href ="template/Import Template.csv">here</a> to view the template.
